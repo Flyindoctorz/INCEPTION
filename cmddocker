@@ -1,15 +1,5 @@
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" > /etc/apt/sources.list.d/docker.list
+docker-compose -f srcs/docker-compose.yml build
+WARN[0000] /home/cgelgon/Documents/INCEPTION/srcs/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Head "http://%2Fvar%2Frun%2Fdocker.sock/_ping": dial unix /var/run/docker.sock: connect: permission denied
+make: *** [Makefile:18: build] Error 1
 
-# Vérifier que c'est bien écrit
-cat /etc/apt/sources.list.d/docker.list
-
-# Continuer
-apt update
-apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-usermod -aG docker cgelgon
-
-systemctl start docker
-systemctl enable docker
-
-docker --version
