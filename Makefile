@@ -6,7 +6,7 @@
 #    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/12 14:05:05 by cgelgon           #+#    #+#              #
-#    Updated: 2026/01/12 14:05:32 by cgelgon          ###   ########.fr        #
+#    Updated: 2026/03/04 10:36:05 by cgelgon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,5 +31,13 @@ re: clean all
 
 logs:
 	$(DOCKER_COMPOSE) logs -f
+
+push:
+	@git add .
+	@echo -n "$(BLUE)Enter your commit message for Inception: $(END)"
+	@read commit_message; \
+	git commit -m "Inception\: $$commit_message"; \
+	git push; \
+	echo "$(YELLOW)📤 All CPP Module  has been pushed with 'Inception\: $$commit_message'$(END)"
 
 .PHONY: all build up down clean re logs
