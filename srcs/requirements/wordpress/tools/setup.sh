@@ -1,8 +1,9 @@
 #!/bin/bash
-
 set -e
 
 DB_PASSWORD=$(cat /run/secrets/db_password)
+WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password)
+WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password)
 
 echo "Waiting for MariaDB to be ready..."
 until mysql -h mariadb -u $MYSQL_USER -p$DB_PASSWORD -e "SELECT 1" &>/dev/null; do
@@ -26,7 +27,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     
     wp core install \
         --url=$DOMAIN_NAME \
-        --title="Inception WordPress" \
+        --title="$WP_TITLE" \
         --admin_user=$WP_ADMIN_USER \
         --admin_password=$WP_ADMIN_PASSWORD \
         --admin_email=$WP_ADMIN_EMAIL \
@@ -43,5 +44,4 @@ else
 fi
 
 chown -R www-data:www-data /var/www/html
-
 exec php-fpm7.4 -F
