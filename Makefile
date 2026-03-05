@@ -6,7 +6,7 @@
 #    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/12 14:05:05 by cgelgon           #+#    #+#              #
-#    Updated: 2026/03/04 10:36:05 by cgelgon          ###   ########.fr        #
+#    Updated: 2026/03/05 10:44:17 by cgelgon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,19 @@ clean: down
 	docker system prune -af
 	docker volume rm $$(docker volume ls -q) 2>/dev/null || true
 
+fclean: down
+	@echo "Cleaning all Docker resources..."
+	docker system prune -af --volumes
+	@echo "Removing data directories..."
+	sudo rm -rf /home/$(USER)/data/mysql
+	sudo rm -rf /home/$(USER)/data/wordpress
+	@echo "Recreating data directories..."
+	mkdir -p /home/$(USER)/data/mysql
+	mkdir -p /home/$(USER)/data/wordpress
+	@echo "Full clean complete."
+
+re: fclean all
+
 re: clean all
 
 logs:
@@ -40,4 +53,4 @@ push:
 	git push; \
 	echo "$(YELLOW)📤 All CPP Module  has been pushed with 'Inception\: $$commit_message'$(END)"
 
-.PHONY: all build up down clean re logs
+.PHONY: all build up down clean fclean re logs
