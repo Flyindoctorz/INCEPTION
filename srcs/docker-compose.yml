@@ -33,6 +33,8 @@ services:
       - .env
     secrets:
       - db_password
+      - wp_admin_password
+      - wp_user_password
 
   nginx:
     build:

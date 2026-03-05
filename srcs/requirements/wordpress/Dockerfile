@@ -27,6 +27,7 @@ WORKDIR /var/www/html
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
+
 COPY tools/setup.sh /usr/local/bin/setup.sh
 RUN chmod +x /usr/local/bin/setup.sh
 
