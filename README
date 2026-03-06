@@ -1,0 +1,22 @@
+INCEPTION 
+
+Projet centre autour de l'apprentissage de Docker, du Docker-compose.
+Le projet s'appelle inception a cause de la regle de sudo, inaccessible sur la session reguliere USER,
+qui nous oblige a utiliser une VM pour faire tourner les docker.
+
+DOCKER permet d'installer des containers isoles qui permet de faire tourner une application tout en utilisant l'OS 
+de la machine hote.
+Le container se ferme lorsqu'aucun processus n'est demarre.
+
+DOCKER-COMPOSE est un outil permettant de de definir le comportement des container lance, et d'executer des applications
+Docker a container multiples. Tout se parametre dans un unique ficher YML qu'une seule commande execute pour build et demarrer
+tout les containers configures.
+
+Sans docker-compose, il faudrait demarrer et parametrer chaque docker individuellement.
+
+L'OBJECTIF :
+faire tourner 3 containers conjointement :
+- MariaDB - systeme de gestion de base de donnee Open Source derive de MySQL
+- Wordpress, qu'on construit en utilisant la database de MariaDB est un systeme de gestion de contenu
+- NGINX, qu'on construit a partir de Wordpress est un logiciel Open Source de serveur web
+
