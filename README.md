@@ -34,19 +34,6 @@ Services inclus :
 - **WordPress**: CMS tournant avec php-fpm dans son propre container, sans NGINX
 - **MariaDB**  : base de donnees relationnelle pour WordPress, non exposee a l'exterieur
 
-Sources utilisees dans le projet :
-- https://tuto.grademe.fr/inception/
-- https://wiki-tech.io/Conteneurisation/Docker/Docker-Compose
-- https://docs.docker.com/engine/install/debian/#install-using-the-repository
-- https://docs.docker.com/network/
-- https://docs.docker.com/storage/volumes/
-- https://nginx.org/en/docs/
-- https://fr.wikipedia.org/wiki/WordPress
-- https://fr.wikipedia.org/wiki/NGINX
-- https://fr.wikipedia.org/wiki/MariaDB
-- https://fr.wikipedia.org/wiki/Docker_(logiciel)
-- https://wiki.mozilla.org/Security/Server_Side_TLS
-
 Choix de conception principaux :
 - Toutes les images sont buildees depuis zero via des Dockerfiles custom (pas d'images Docker Hub pre-faites)
 - Un seul container expose un port externe : NGINX sur le 443
@@ -115,22 +102,23 @@ Choix de conception principaux :
 
 ---
 
-III. Instruction : 
+II. Instruction : 
 
 Use make to compile the project 
 
-III. Ressources : 
+III Ressources :
 
-Ressources used : 
+Sources utilisees dans le projet :
+- https://tuto.grademe.fr/inception/
+- https://wiki-tech.io/Conteneurisation/Docker/Docker-Compose
+- https://docs.docker.com/engine/install/debian/#install-using-the-repository
+- https://docs.docker.com/network/
+- https://docs.docker.com/storage/volumes/
+- https://nginx.org/en/docs/
+- https://fr.wikipedia.org/wiki/WordPress
+- https://fr.wikipedia.org/wiki/NGINX
+- https://fr.wikipedia.org/wiki/MariaDB
+- https://fr.wikipedia.org/wiki/Docker_(logiciel)
+- https://wiki.mozilla.org/Security/Server_Side_TLS
+- Claude code pour corriger des scripts
 
-https://tuto.grademe.fr/inception/
-https://wiki-tech.io/Conteneurisation/Docker/Docker-Compose
-https://docs.docker.com/engine/install/debian/#install-using-the-repository
-https://fr.wikipedia.org/wiki/WordPress
-https://fr.wikipedia.org/wiki/NGINX
-https://fr.wikipedia.org/wiki/MySQL
-https://fr.wikipedia.org/wiki/MariaDB
-https://wiki-tech.io/Conteneurisation/Docker/Docker-Compose
-https://fr.wikipedia.org/wiki/Docker_(logiciel)
-https://en.wikipedia.org/wiki/README
-Claude - pour corriger certains scripts 
