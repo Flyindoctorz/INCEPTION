@@ -1,0 +1,106 @@
+
+
+ Dossier srcs/ et Makefile à la racine
+----------------------------------------
+ls -la
+
+→ Vérifier la présence de srcs/ et Makefile
+
+
+
+  À exécuter AVANT l'évaluation pour partir d'un environnement propre :
+--------------------------------------------------------------------------
+docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/null
+cf Makefile
+
+
+ PAS de 'network: host'
+-------------------------
+cat srcs/docker-compose.yml | grep -i "network: host"
+
+→ Cette commande ne doit RIEN retourner
+
+
+✓ Présence de 'networks:'
+--------------------------
+cat srcs/docker-compose.yml | grep -i "networks:"
+
+→ Doit afficher au moins une section networks:
+
+
+✗ PAS de 'links:'
+-----------------
+cat srcs/docker-compose.yml | grep -i "links:"
+
+→ Cette commande ne doit RIEN retourner
+
+
+
+✗ PAS de '--link' dans Makefile ou scripts
+-------------------------------------------
+grep -r "\-\-link" Makefile srcs/
+
+→ Cette commande ne doit RIEN retourner
+
+
+
+Afficher tous les ENTRYPOINT et CMD
+------------------------------------
+grep -r "ENTRYPOINT\|CMD" srcs/requirements/*/Dockerfile
+
+Vérifier que :
+  ✗ PAS de 'tail -f' dans ENTRYPOINT/CMD
+  ✗ PAS de commandes en background (ex: nginx & bash)
+  ✗ PAS de 'bash' ou 'sh' seuls (sauf pour lancer un script)
+
+
+✗ PAS de tail -f dans les Dockerfiles
+--------------------------------------
+grep -r "tail -f" srcs/requirements/*/Dockerfile
+
+→ Cette commande ne doit RIEN retourner
+
+
+✗ PAS de boucles infinies
+--------------------------
+grep -r "sleep infinity\|tail -f\|while true" srcs/requirements/*/tools/*.sh
+
+  ✗ PAS de : sleep infinity
+  ✗ PAS de : tail -f /dev/null
+  ✗ PAS de : tail -f /dev/random
+  ✓ Les boucles 'while' doivent avoir une condition de sortie
+
+
+
+MariaDB - Dockerfile
+--------------------
+CMD ["/usr/local/bin/setup.sh"]
+
+Le script setup.sh se termine par :
+exec mysqld --user=mysql --console
+
+
+WordPress - Dockerfile
+----------------------
+CMD ["/usr/local/bin/setup.sh"]
+
+Le script setup.sh se termine par :
+exec php-fpm7.4 -F
+
+
+Nginx - Dockerfile
+------------------
+CMD ["nginx", "-g", "daemon off;"]
+
+✓ 'daemon off;' fait tourner nginx en foreground
+
+make
+
+Vérifier que les 3 conteneurs sont en état 'Up' :
+--------------------------------------------------
+docker ps
+
+Doit afficher :
+  ✓ nginx (Up)
+  ✓ wordpress (Up)
+  ✓ mariadb (Up)
