@@ -43,15 +43,16 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --admin_email=$WP_ADMIN_EMAIL \
         --allow-root
 
-    # Create a regular author user (non-admin, as required by the subject)
+    echo "WordPress installation complete."
+fi
+
+# Create author user if it does not exist yet
+if ! wp user get $WP_USER --allow-root --path=/var/www/html &>/dev/null; then
     wp user create $WP_USER $WP_USER_EMAIL \
         --user_pass=$WP_USER_PASSWORD \
         --role=author \
         --allow-root
-
-    echo "WordPress installation complete."
-else
-    echo "WordPress already installed, skipping setup."
+    echo "User $WP_USER created."
 fi
 
 # Fix file ownership so php-fpm can read/write WordPress files
