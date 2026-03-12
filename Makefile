@@ -6,13 +6,18 @@
 #    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/12 14:05:05 by cgelgon           #+#    #+#              #
-#    Updated: 2026/03/12 13:58:20 by cgelgon          ###   ########.fr        #
+#    Updated: 2026/03/12 15:23:47 by cgelgon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DOCKER_COMPOSE = docker-compose -f srcs/docker-compose.yml
 
-all: build up
+all: 
+	mkdir -p /home/$(USER)/data/mariadb
+	mkdir -p /home/$(USER)/data/wordpress
+	$(DOCKER_COMPOSE) build
+	$(DOCKER_COMPOSE) up -d
+
 
 build:
 	$(DOCKER_COMPOSE) build
