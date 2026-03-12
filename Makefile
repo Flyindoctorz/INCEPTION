@@ -6,7 +6,7 @@
 #    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/12 14:05:05 by cgelgon           #+#    #+#              #
-#    Updated: 2026/03/05 10:44:17 by cgelgon          ###   ########.fr        #
+#    Updated: 2026/03/12 13:58:20 by cgelgon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,6 @@ fclean: down
 	@echo "Full clean complete."
 
 re: fclean all
-
-re: clean all
 
 logs:
 	$(DOCKER_COMPOSE) logs -f
