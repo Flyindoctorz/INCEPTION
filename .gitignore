@@ -1,0 +1,4 @@
+secrets/
+srcs/secrets/
+srcs/.env
+data/
